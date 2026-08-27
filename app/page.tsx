@@ -1,69 +1,46 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+
+const navigation = [["Accueil", "home"], ["À propos", "about"], ["Expérience", "experience"], ["Compétences", "skills"], ["Formation", "education"], ["Contact", "contact"]];
+const experiences = [
+  { title: "Automatisation de génération de prospects", company: "Freelance - Phase préparatoire", date: "07/2026", color: "green", points: ["Pré-configuration de l'authentification et recherche d'annonces selon filtres prédéfinis.", "Mise en place d'un processus de contact automatisé via techniques de Computer Vision.", "Configuration de conteneurs Docker pour l'environnement applicatif.", "Déploiement sur un VPC Amazon (AWS)."], tags: ["Computer Vision", "Playwright", "Selenium", "Docker", "AWS (VPC)"] },
+  { title: "Stage Ingénieur Applicatif TestRunner", company: "Groupe COVEA", date: "02/2025 - 07/2025", color: "cyan", points: ["Étude et implémentation d'une vision d'architecture.", "Industrialisation du développement de l'application.", "Conception technique des évolutions fonctionnelles.", "Réalisation et tests des fonctionnalités.", "Déploiement de l'application sur serveur Tomcat.", "Montée en compétence sur l'utilisation et maintien en condition opérationnelle."], tags: ["End-to-End Test", "Tests Unitaires", "Java", "Spring", "Jenkins", "Tomcat"] },
+  { title: "Stage Développeur d'application de suivi de tirs de performance", company: "MAIF", date: "04/2024 - 06/2024", color: "yellow", points: ["Modélisation de l'architecture de l'application.", "Conception des modules de centralisation et de persistance des données.", "Développement d'adaptateurs pour l'intégration des outils de performance.", "Réalisation de tests unitaires pour valider l'implémentation du modèle de service.", "Création d'une interface utilisateur en React.js."], tags: ["Architecture Hexagonale", "TDD", "Clean Code", "React", "Java", "JUnit"] },
+  { title: "Stage de développement web (React)", company: "Insensia", date: "04/2023 - 06/2023", color: "green", points: ["Développement et maintenance d'interfaces de gestion d'appareils de contrôle de l'environnement intérieur des bâtiments.", "Récupération et transmission de données via le protocole MQTT.", "Réalisation de tests unitaires.", "Déploiement du site sur serveur via FTP et conteneurisation Docker."], tags: ["Tests Unitaires", "React", "MQTT", "JUnit", "JavaScript", "Docker"] },
+];
+const coreSkills = ["Java", "Spring", "JavaScript", "PHP", "Symfony", "Selenium", "Playwright", "JUnit", "Docker", "AWS", "Git", "SVN", "FileZilla", "React", "MQTT"];
+const expertise = ["Architecture Logicielle", "Processus Métier", "Développement Web", "Administration Réseau"];
+const strengths = ["Rigueur et Organisation", "Capacité d'Adaptation", "Travail en Équipe", "Autonomie", "Capacité de Concentration"];
+
+function Icon({ children }: { children: string }) { return <span className="material-symbols-outlined" aria-hidden="true">{children}</span>; }
+function SectionHeading({ title, centered = false }: { title: string; centered?: boolean }) { return <div className={`section-heading ${centered ? "centered" : ""}`}><h2>{title}</h2><div /></div>; }
+function List({ items }: { items: string[] }) { return <ul className="simple-list">{items.map((item) => <li key={item}><span />{item}</li>)}</ul>; }
+function SkillCard({ title, icon, children, className = "" }: { title: string; icon: string; children: React.ReactNode; className?: string }) { return <article className={`skill-card ${className}`}><h3><Icon>{icon}</Icon>{title}</h3>{children}</article>; }
+function EducationCard({ year, title, subtitle, color }: { year: string; title: string; subtitle: string; color: string }) { return <article className={`education-card ${color}`}><Icon>school</Icon><div><span className="education-year">{year}</span><h3>{title}</h3><p>{subtitle}</p><hr /><strong>La Rochelle Université</strong></div></article>; }
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  useEffect(() => {
+    const sections = navigation.map(([, id]) => document.getElementById(id));
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && setActiveSection(entry.target.id)), { rootMargin: "-25% 0px -65%" });
+    sections.forEach((section) => section && observer.observe(section));
+    const reveals = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: 0.1 });
+    reveals.forEach((element) => revealObserver.observe(element));
+    return () => { observer.disconnect(); revealObserver.disconnect(); };
+  }, []);
+  return <div className="site-shell">
+    <nav className="top-nav"><div className="nav-inner"><a className="brand" href="#home">Aaron R.</a><div className={`nav-links ${menuOpen ? "is-open" : ""}`}>{navigation.map(([label, id]) => <a key={id} className={activeSection === id ? "active" : ""} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}<a className="nav-cta mobile-cta" href="#contact" onClick={() => setMenuOpen(false)}>Me Contacter</a></div><a className="nav-cta desktop-cta" href="#contact">Me Contacter</a><button className="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><Icon>{menuOpen ? "close" : "menu"}</Icon></button></div></nav>
+    <main>
+      <section className="hero" id="home"><div className="hero-content reveal-visible"><p className="eyebrow">PROFIL TECHNIQUE</p><h1>Aaron Randrianarisona</h1><h2>Développeur Informatique</h2><div className="hero-actions"><a className="button button-primary" href="#experience">Voir le Portfolio</a><a className="button button-outline" href="#contact">Me Contacter</a></div></div><a className="scroll-cue" href="#about"><span>Défiler pour explorer</span><Icon>keyboard_arrow_down</Icon></a></section>
+      <section className="section about-section" id="about"><div className="content-grid about-grid reveal"><div className="portrait-frame"><div className="portrait-mark">AR<span>/</span></div><p>ARCHITECTURE<br />&amp; DÉVELOPPEMENT</p></div><div><SectionHeading title="Profil" /><p className="lead">Jeune diplômé d&apos;un Master en Informatique, spécialisé en architecture logicielle, je suis un passionné de développement et d&apos;innovations technologiques. Mon parcours académique, complété par plusieurs stages pratiques, m&apos;a permis d&apos;acquérir une solide base technique et une capacité d&apos;adaptation face aux défis complexes.</p><p className="lead">Je recherche activement un poste de Développeur logiciel où je pourrai mettre à profit mes compétences en conception et développement, tout en contribuant activement aux projets de l&apos;entreprise. Je suis motivé, rigoureux et prêt à m&apos;investir pleinement dans de nouvelles missions stimulantes.</p><div className="profile-facts"><div><strong>Master Informatique</strong><span>Architecte Logiciel</span></div><div><strong>Spécialisation</strong><span>Développement logiciel, web &amp; automatisation</span></div></div></div></div></section>
+      <section className="section experience-section" id="experience"><div className="content-width"><SectionHeading title="Expériences Professionnelles & Projets" /><div className="timeline">{experiences.map((experience) => <article className={`experience-card ${experience.color} reveal`} key={experience.title}><div className="experience-head"><div><h3>{experience.title}</h3><h4>{experience.company}</h4></div><time>{experience.date}</time></div><ul>{experience.points.map((point) => <li key={point}><Icon>chevron_right</Icon><span>{point}</span></li>)}</ul><div className="tag-list">{experience.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></article>)}</div></div></section>
+      <section className="section skills-section" id="skills"><div className="content-width reveal"><SectionHeading title="Arsenal Technique" centered /><div className="skills-grid"><SkillCard title="Stack Technologique Principale" icon="terminal" className="core-skills"><div className="skill-tags">{coreSkills.map((skill) => <span key={skill}>{skill}</span>)}</div></SkillCard><SkillCard title="Domaines d'Expertise" icon="architecture"><List items={expertise} /></SkillCard><SkillCard title="Savoir-Être" icon="psychology"><List items={strengths} /></SkillCard></div></div></section>
+      <section className="section education-section" id="education"><div className="content-width reveal"><SectionHeading title="Formation" /><div className="education-grid"><EducationCard year="2023 – 2025" title="Master Informatique" subtitle="Parcours architecte logiciel" color="cyan" /><EducationCard year="2020 – 2023" title="Licence Informatique" subtitle="Informatique Générale" color="green" /></div></div></section>
+      <section className="contact-section" id="contact"><div className="contact-content reveal"><SectionHeading title="Prêt à Collaborer ?" centered /><p>Je suis activement à la recherche de nouvelles opportunités pour mettre en pratique mes compétences en développement informatique et logiciel.</p><a className="button button-primary contact-button" href="mailto:aaronrandria@gmail.com"><Icon>mail</Icon>aaronrandria@gmail.com</a></div></section>
+    </main>
+    <footer><div><a className="brand" href="#home">Aaron R.</a><p>© 2024 Portfolio Aaron Randrianarisona. Tous droits réservés.</p></div><div className="social-links"><a href="https://linkedin.com/in/aaron-randrianarisona-Sa0223210" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/AaronRandrianarisona" target="_blank" rel="noreferrer">GitHub</a></div></footer>
+  </div>;
 }
