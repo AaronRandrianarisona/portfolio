@@ -58,23 +58,23 @@ const copy = {
     menuToggleClose: "Close menu",
     heroEyebrow: "TECHNICAL PROFILE",
     role: "Software Developer",
-    portfolioButton: "View Portfolio",
+    portfolioButton: "Explore My Work",
     scroll: "Scroll to explore",
     profileTitle: "Profile",
-    profileIntro1: "A recent graduate of a Master of Computer Science focused on software architecture, I am passionate about software development and technological innovation. My academic background, enhanced by several practical internships, has given me a solid technical foundation and strong adaptability to complex challenges.",
-    profileIntro2: "I am actively seeking a software developer role where I can apply my skills in design and development while contributing meaningfully to the company's projects. I am motivated, rigorous, and ready to fully commit to new and stimulating missions.",
-    levelLabel: "Master in Computer Science",
+    profileIntro1: "I recently completed a Master’s degree in Computer Science with a focus on software architecture. I am passionate about software development and technological innovation. Through my academic journey and several hands-on internships, I developed a strong technical foundation and a proven ability to adapt to complex challenges.",
+    profileIntro2: "I am actively seeking a software developer opportunity where I can apply my expertise in design and development while contributing to meaningful projects. I am motivated, rigorous, and fully committed to taking on new and challenging responsibilities.",
+    levelLabel: "Master’s in Computer Science",
     levelValue: "Software Architect",
     specializationLabel: "Specialization",
     specializationValue: "Software, web & automation development",
     experienceTitle: "Professional Experience & Projects",
-    skillsTitle: "Technical Arsenal",
-    skillCardMain: "Core Tech Stack",
-    expertiseTitle: "Expertise Areas",
+    skillsTitle: "Technical Stack",
+    skillCardMain: "Core Technologies",
+    expertiseTitle: "Core Expertise",
     strengthsTitle: "Soft Skills",
     educationTitle: "Education",
     contactTitle: "Ready to Collaborate?",
-    contactText: "I am actively looking for new opportunities to apply my skills in software and computer development.",
+    contactText: "I am actively looking for new opportunities to apply my skills in software and computer development while contributing to impactful projects.",
     footerText: "© 2026 Aaron Randrianarisona Portfolio. All rights reserved.",
     languageLabel: "Language selection",
   },
@@ -150,7 +150,7 @@ export default function Home() {
       <section className="section about-section" id="about"><div className="content-grid about-grid reveal"><div className="portrait-frame"><Image src="/images/profile.jpg" fill={true} alt="Aaron Randrianarisona" className="w-full h-full object-cover rounded-lg grayscale hover:grayscale-0 transition-all duration-500 shadow-lg border border-white/10"/></div><div><SectionHeading title={currentCopy.profileTitle} /><p className="lead">{currentCopy.profileIntro1}</p><p className="lead">{currentCopy.profileIntro2}</p><div className="profile-facts"><div><strong>{currentCopy.levelLabel}</strong><span>{currentCopy.levelValue}</span></div><div><strong>{currentCopy.specializationLabel}</strong><span>{currentCopy.specializationValue}</span></div></div></div></div></section>
       <section className="section experience-section" id="experience"><div className="content-width"><SectionHeading title={currentCopy.experienceTitle} /><div className="timeline">{currentExperiences.map((experience) => <article className={`experience-card ${experience.color} reveal`} key={experience.title}><div className="experience-head"><div><h3>{experience.title}</h3><h4>{experience.company}</h4></div><time>{experience.date}</time></div><ul>{experience.points.map((point) => <li key={point}><Icon>chevron_right</Icon><span>{point}</span></li>)}</ul><div className="tag-list">{experience.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></article>)}</div></div></section>
       <section className="section skills-section" id="skills"><div className="content-width reveal"><SectionHeading title={currentCopy.skillsTitle} centered /><div className="skills-grid"><SkillCard title={currentCopy.skillCardMain} icon="terminal" className="core-skills"><div className="skill-tags">{currentCoreSkills.map((skill) => <span key={skill}>{skill}</span>)}</div></SkillCard><SkillCard title={currentCopy.expertiseTitle} icon="architecture"><List items={currentExpertise} /></SkillCard><SkillCard title={currentCopy.strengthsTitle} icon="psychology"><List items={currentStrengths} /></SkillCard></div></div></section>
-      <section className="section education-section" id="education"><div className="content-width reveal"><SectionHeading title={currentCopy.educationTitle} /><div className="education-grid"><EducationCard year="2023 – 2025" title={language === "fr" ? "Master Informatique" : "Master of Computer Science"} subtitle={language === "fr" ? "Parcours architecte logiciel" : "Software Architecture"} color="cyan" /><EducationCard year="2020 – 2023" title={language === "fr" ? "Licence Informatique" : "Bachelor of Computer Science"} subtitle={language === "fr" ? "Informatique Générale" : "General Computer Science"} color="green" /></div></div></section>
+      <section className="section education-section" id="education"><div className="content-width reveal"><SectionHeading title={currentCopy.educationTitle} /><div className="education-grid"><EducationCard year="2023 – 2025" title={language === "fr" ? "Master Informatique" : "Master's in Computer Science"} subtitle={language === "fr" ? "Parcours architecte logiciel" : "Software Architecture"} color="cyan" /><EducationCard year="2020 – 2023" title={language === "fr" ? "Licence Informatique" : "Bachelor's in Computer Science"} subtitle={language === "fr" ? "Informatique Générale" : "General Computer Science"} color="green" /></div></div></section>
       <section className="contact-section" id="contact"><div className="contact-content reveal"><SectionHeading title={currentCopy.contactTitle} centered /><p>{currentCopy.contactText}</p><a className="button button-primary contact-button" href="mailto:aaronrandria@gmail.com"><Icon>mail</Icon>aaronrandria@gmail.com</a></div></section>
     </main>
     <footer><div><a className="brand" href="#home">Aaron R.</a><p>{currentCopy.footerText}</p></div><div className="social-links"><a href="https://linkedin.com/in/aaron-randrianarisona-Sa0223210" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/AaronRandrianarisona" target="_blank" rel="noreferrer">GitHub</a></div></footer>
